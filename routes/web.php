@@ -1,6 +1,8 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,10 +15,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// ------------------------------- Middleware Route -------------------------
+Route::middleware(['auth'])->group(function () {
+    //  -------------------------------------------- Admin Route -----------------------------------
+    Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
+
+    // ------------------------------------------ Brand Route ------------------------------
+    // Route::get('manage-brand', [BrandController::class, 'index'])->name('brand.index');
+});
