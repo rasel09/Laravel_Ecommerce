@@ -28,7 +28,7 @@
     <meta name="description" content="Premium Quality and Responsive UI for Dashboard.">
     <meta name="author" content="ThemePixels">
 
-    <title>@yield('title') | Ecommerce</title>
+    <title>@yield('title') | Deshbord</title>
 
   @include('admin.include.style')
   </head>
