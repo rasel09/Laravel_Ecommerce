@@ -34,5 +34,22 @@
       </ul>
        {{-- dropdown --}}
        
+        
+     {{-- dropdown --}}
+
+    {{-- Category --}}
+     <a href="#" class="sl-menu-link @yield('categories')">
+        <div class="sl-menu-item">
+          <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+          <span class="menu-item-label">Categories</span>
+          <i class="menu-item-arrow fa fa-angle-down"></i>
+        </div>
+      </a>
+      <ul class="sl-menu-sub nav flex-column">
+        <li class="nav-item"><a href="{{route('category.create')}}"  class="nav-link @yield('addCategory')">Add Category</a></li>
+        <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @yield('manageCategory')">Manage Category</a></li>
+      </ul>
+       {{-- dropdown --}}
+       
       </div>
     </div>
