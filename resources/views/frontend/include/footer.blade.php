@@ -5,7 +5,7 @@
             <div class="col-lg-3 col-md-6 col-sm-6">
                 <div class="footer__about">
                     <div class="footer__about__logo">
-                        <a href="./index.html"><img src="{{asset('website/')}}/img/logo.png" alt=""></a>
+                        <a href="./index.html"><img src="{{asset('website/')}}/img/online-shop.png" alt="" style="width: 80px;"></a>
                     </div>
                     <ul>
                         <li>Address: 60-49 Road 11378 New York</li>

@@ -5,18 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 
 
@@ -24,7 +14,8 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // -------------------------------- Frontend Rout -------------------------------------
-Route::get('/', [FrontendController::class, 'index']);
+Route::get('/', [FrontendController::class, 'index'])->name('home');
+Route::get('/product/detalis/{id}', [FrontendController::class, 'productDedalis']);
 
 // ------------------------------- Middleware Route -------------------------
 Route::middleware(['auth'])->group(function () {
@@ -50,4 +41,14 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('category-delete/{id}', [CategoryController::class, 'destroy'])->name('category.destroy');
     Route::get('category-inactive/{id}', [CategoryController::class, 'inactive'])->name('category.inactive');
     Route::get('category-active/{id}', [CategoryController::class, 'active'])->name('category.active');
+
+    // ------------------------------------------ Product Route ------------------------------
+    Route::get('manage-product', [ProductController::class, 'index'])->name('product.index');
+    Route::get('add-product', [ProductController::class, 'create'])->name('product.create');
+    Route::post('product-store', [ProductController::class, 'store'])->name('product.store');
+    Route::get('product-edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
+    Route::put('product-update/{id}', [ProductController::class, 'update'])->name('product.update');
+    Route::delete('product-delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
+    Route::get('product-inactive/{id}', [ProductController::class, 'inactive'])->name('product.inactive');
+    Route::get('product-active/{id}', [ProductController::class, 'active'])->name('product.active');
 });

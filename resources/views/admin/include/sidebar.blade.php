@@ -18,8 +18,10 @@
           </div>
         </a>
 
-        {{-- Brand --}}
+        
      {{-- dropdown --}}
+
+     {{-- Brand --}}
 
      <a href="#" class="sl-menu-link @yield('brand')">
         <div class="sl-menu-item">
@@ -32,10 +34,6 @@
         <li class="nav-item"><a href="{{route('brand.create')}}"  class="nav-link @yield('addBrand')">Add Brand</a></li>
         <li class="nav-item"><a href="{{route('brand.index')}}" class="nav-link @yield('manageBrand')">Manage Brand</a></li>
       </ul>
-       {{-- dropdown --}}
-       
-        
-     {{-- dropdown --}}
 
     {{-- Category --}}
      <a href="#" class="sl-menu-link @yield('categories')">
@@ -49,7 +47,20 @@
         <li class="nav-item"><a href="{{route('category.create')}}"  class="nav-link @yield('addCategory')">Add Category</a></li>
         <li class="nav-item"><a href="{{route('category.index')}}" class="nav-link @yield('manageCategory')">Manage Category</a></li>
       </ul>
-       {{-- dropdown --}}
-       
+
+        {{-- Product --}}
+
+     <a href="#" class="sl-menu-link @yield('products')">
+        <div class="sl-menu-item">
+          <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+          <span class="menu-item-label">Products</span>
+          <i class="menu-item-arrow fa fa-angle-down"></i>
+        </div>
+      </a>
+      <ul class="sl-menu-sub nav flex-column">
+        <li class="nav-item"><a href="{{route('product.create')}}"  class="nav-link @yield('addProduct')">Add Product</a></li>
+        <li class="nav-item"><a href="{{route('product.index')}}" class="nav-link @yield('manageProduct')">Manage Product</a></li>
+      </ul>
+      
       </div>
     </div>
