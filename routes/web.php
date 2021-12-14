@@ -2,9 +2,11 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CoponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 
@@ -16,6 +18,13 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 // -------------------------------- Frontend Rout -------------------------------------
 Route::get('/', [FrontendController::class, 'index'])->name('home');
 Route::get('/product/detalis/{id}', [FrontendController::class, 'productDedalis']);
+
+// -------------------------------- Cart Route ---------------------------------
+Route::post('add-to-cart/{cart_id}', [CartController::class, 'showCart'])->name('show.cart');
+Route::get('cart-page', [CartController::class, 'cartpage'])->name('cartPage');
+Route::get('cart-remove/{cart_id}', [CartController::class, 'cartRemove'])->name('cart.destroy');
+Route::post('cart-update/{cart_id}', [CartController::class, 'cartUpdate'])->name('cart.update');
+Route::post('apply-copon', [CartController::class, 'applyCopon'])->name('apply.copon');
 
 // ------------------------------- Middleware Route -------------------------
 Route::middleware(['auth'])->group(function () {
@@ -51,4 +60,15 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('product-delete/{id}', [ProductController::class, 'destroy'])->name('product.destroy');
     Route::get('product-inactive/{id}', [ProductController::class, 'inactive'])->name('product.inactive');
     Route::get('product-active/{id}', [ProductController::class, 'active'])->name('product.active');
+
+
+    // ------------------------------------------ Copon Route ------------------------------
+    Route::get('manage-copon', [CoponController::class, 'index'])->name('copon.index');
+    Route::get('add-copon', [CoponController::class, 'create'])->name('copon.create');
+    Route::post('copon-store', [CoponController::class, 'store'])->name('copon.store');
+    Route::get('copon-edit/{id}', [CoponController::class, 'edit'])->name('copon.edit');
+    Route::put('copon-update/{id}', [CoponController::class, 'update'])->name('copon.update');
+    Route::delete('copon-delete/{id}', [CoponController::class, 'destroy'])->name('copon.destroy');
+    Route::get('copon-inactive/{id}', [CoponController::class, 'inactive'])->name('copon.inactive');
+    Route::get('copon-active/{id}', [CoponController::class, 'active'])->name('copon.active');
 });

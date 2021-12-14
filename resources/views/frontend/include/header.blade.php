@@ -9,7 +9,7 @@
              <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
              <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
          </ul>
-         <div class="header__cart__price">item: <span>$150.00</span></div>
+         <div class="header__cart__price">: <span>$150.00</span></div>
      </div>
      <div class="humberger__menu__widget">
          <div class="header__top__right__language">
@@ -24,6 +24,7 @@
          <div class="header__top__right__auth">
              <a href="#"><i class="fa fa-user"></i> Login</a>
          </div>
+       
      </div>
      <nav class="humberger__menu__nav mobile-menu">
          <ul>
@@ -95,6 +96,18 @@
              </div>
          </div>
      </div>
+     {{-- show message on product--}}
+     <div class="container mt-3">
+        @if (Session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+         <strong>{{Session('success')}}</strong>
+         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+           <span aria-hidden="true">&times;</span>
+         </button>
+       
+        @endif
+     </div>
+    </div>
      <div class="container">
          <div class="row">
              <div class="col-lg-3">
@@ -122,11 +135,17 @@
              </div>
              <div class="col-lg-3">
                  <div class="header__cart">
+                     @php
+                         $totle=App\Models\Cart::all()->where('user_ip',request()->ip())->sum(function($t){
+                             return $t->price * $t->qty;
+                         });
+                        $quantity=App\Models\Cart::where('user_ip',request()->ip())->sum('qty');
+                     @endphp
                      <ul>
                          <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                         <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                         <li><a href="{{route('cartPage')}}"><i class="fa fa-shopping-bag"></i> <span>{{$quantity}}</span></a></li>
                      </ul>
-                     <div class="header__cart__price">item: <span>$150.00</span></div>
+                     <div class="header__cart__price">item: <span>${{$totle}}</span></div>
                  </div>
              </div>
          </div>

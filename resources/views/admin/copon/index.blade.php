@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 @section('title') category @endsection
-@section('categories')  active show-sub @endsection
-@section('manageCategory')  active  @endsection
+@section('copon')  active show-sub @endsection
+@section('manageCopon')  active  @endsection
 
 @section('admin_content')
 
@@ -24,48 +24,50 @@
             @endif
                <div class="card">
                    <div class="card-body">
-                       <h4 class="mb-4">all Category
-                           <a href="{{route('category.create')}}" class="btn btn-primary btn-sm float-right">add Category</a>
+                       <h4 class="mb-4">all Copon
+                           <a href="{{route('copon.create')}}" class="btn btn-primary btn-sm float-right">add Copon</a>
                        </h4>
                        <table class="table table-bordered">
                            <thead>
                                <tr>
                                    <th>Sr No</th>
-                                   <th>Category_name</th>
+                                   <th>Copon_name</th>
+                                   <th>Discoute</th>
                                    <th>Status</th>
                                    <th>Action</th>
                                </tr>
                            </thead>
                            <tbody>
-                               @foreach ($categories as $category)
+                               @foreach ($copons as $copon)
                                <tr>
-                                   <td>{{$category->id}}</td>
-                                   <td>{{$category->category_name}}</td>
+                                   <td>{{$copon->id}}</td>
+                                   <td>{{$copon->copon_name}}</td>
+                                   <td>{{$copon->discoute}}%</td>
                                    <td>
-                                       @if ($category->status==1)
+                                       @if ($copon->status==1)
                                            <span class="badge badge-primary">Active</span>
                                            @else
                                            <span class="badge badge-danger">Inactive</span>
                                        @endif
                                    </td>
                                    <td>
-                                       <a href="{{route('category.edit',$category->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
-                                       <form class="d-inline" action="{{route('category.destroy',$category->id)}}" method="POST">
+                                       <a href="{{route('copon.edit',$copon->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-pencil"></i></a>
+                                       <form class="d-inline" action="{{route('copon.destroy',$copon->id)}}" method="POST">
                                            @csrf
                                            @method('delete')
                                            <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-trash" onclick="return confirm('Are you shere data deleted!')"></i></button>
                                        </form>
-                                       @if ($category->status==1)
-                                       <a href="{{route('category.inactive',$category->id)}}" class="btn btn-danger btn-sm"><i class="fa fa-arrow-down"></i></a>
+                                       @if ($copon->status==1)
+                                       <a href="{{route('copon.inactive',$copon->id)}}" class="btn btn-danger btn-sm"><i class="fa fa-arrow-down"></i></a>
                                        @else
-                                       <a href="{{route('category.active',$category->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-arrow-up"></i></a>
+                                       <a href="{{route('copon.active',$copon->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-arrow-up"></i></a>
                                        @endif
                                    </td>
                                </tr>
                                @endforeach
                            </tbody>
                        </table>
-                       {{$categories->links('vendor.pagination.bootstrap-4')}}
+                       {{$copons->links('vendor.pagination.bootstrap-4')}}
                    </div>
                </div>
            </div>

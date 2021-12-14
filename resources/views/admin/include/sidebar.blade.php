@@ -61,6 +61,20 @@
         <li class="nav-item"><a href="{{route('product.create')}}"  class="nav-link @yield('addProduct')">Add Product</a></li>
         <li class="nav-item"><a href="{{route('product.index')}}" class="nav-link @yield('manageProduct')">Manage Product</a></li>
       </ul>
+
+        {{-- Copon --}}
+
+     <a href="#" class="sl-menu-link @yield('copon')">
+        <div class="sl-menu-item">
+          <i class="menu-item-icon ion-ios-pie-outline tx-20"></i>
+          <span class="menu-item-label">Copon</span>
+          <i class="menu-item-arrow fa fa-angle-down"></i>
+        </div>
+      </a>
+      <ul class="sl-menu-sub nav flex-column">
+        <li class="nav-item"><a href="{{route('copon.create')}}"  class="nav-link @yield('addCopon')">Add Copon</a></li>
+        <li class="nav-item"><a href="{{route('copon.index')}}" class="nav-link @yield('manageCopon')">Manage Copon</a></li>
+      </ul>
       
       </div>
     </div>
