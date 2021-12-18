@@ -3,12 +3,15 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FrontendController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\CoponController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AdminOrderController;
 
 
 
@@ -25,9 +28,17 @@ Route::get('cart-page', [CartController::class, 'cartpage'])->name('cartPage');
 Route::get('cart-remove/{cart_id}', [CartController::class, 'cartRemove'])->name('cart.destroy');
 Route::post('cart-update/{cart_id}', [CartController::class, 'cartUpdate'])->name('cart.update');
 Route::post('apply-copon', [CartController::class, 'applyCopon'])->name('apply.copon');
+Route::get('copon-romeve', [CartController::class, 'coponRemove'])->name('remove.copon');
+
+//----------------------------- CheckOut Route ----------------
+Route::get('check-out', [CartController::class, 'checkOut'])->name('checkout.index');
+
+//----------------------------------- Order Route -----------------------------
+Route::post('plase-order', [OrderController::class, 'store'])->name('store.order');
+Route::get('order-success', [OrderController::class, 'orderComplate'])->name('orderSuccess');
 
 // ------------------------------- Middleware Route -------------------------
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'isAdmin'])->group(function () {
     //  -------------------------------------------- Admin Route -----------------------------------
     Route::get('admin', [AdminController::class, 'index'])->name('admin.index');
 
@@ -71,4 +82,9 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('copon-delete/{id}', [CoponController::class, 'destroy'])->name('copon.destroy');
     Route::get('copon-inactive/{id}', [CoponController::class, 'inactive'])->name('copon.inactive');
     Route::get('copon-active/{id}', [CoponController::class, 'active'])->name('copon.active');
+
+    // ------------------------------------------ Admin Order Route -----------------------------
+    Route::get('admin-order', [AdminOrderController::class, 'showData'])->name('order.index');
+    Route::get('admin-order-view/{product_id}', [AdminOrderController::class, 'view'])->name('order.view');
+    Route::delete('admin-order-delete/{product_id}', [AdminOrderController::class, 'destoy'])->name('order.destoy');
 });

@@ -81,14 +81,16 @@
                     <ul>
                         @if (Session::has('copon'))
                         <li>Subtotal <span>${{$subtotle}}</span></li>
+                        <li>Copon <span>{{Session()->get('copon')['copon_name']}}<a href="{{route('remove.copon')}}"><i class="fa fa-times btn btn-success btn-sm ml-2"></i></a></span></li>
                         <li>Discount<span>${{Session()->get('copon')['discoute']}}({{
                             $discoute=$subtotle * Session()->get('copon')['discoute']/100
                         }}$)</span></li>
                         <li>Total <span>${{$subtotle-$discoute}}</span></li>
                         @else
+                        <li>Totle<span>${{$subtotle}}</span></li>
                         @endif
                     </ul>
-                    <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    <a href="{{route('checkout.index')}}" class="primary-btn">PROCEED TO CHECKOUT</a>
                 </div>
             </div>
         </div>

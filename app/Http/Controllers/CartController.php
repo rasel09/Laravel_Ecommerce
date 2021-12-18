@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Copon;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
@@ -66,6 +67,31 @@ class CartController extends Controller
             return redirect()->route('cartPage')->with('success', 'Apply Copon Successfule');
         } else {
             return redirect()->route('cartPage')->with('success', 'Apply copon Invalid!');
+        }
+    }
+
+    // ----------------------------------- Remove Copon 
+    public function coponRemove()
+    {
+        if (Session::has('copon')) {
+            Session()->forget('copon');
+            return redirect()->route('cartPage')->with('success', 'Copon Remove Success');
+        }
+    }
+
+    // -------------------------------------- checkout page -------------------------------------
+    public function checkOut()
+    {
+        if (Auth::check()) {
+            $carts = Cart::where('user_ip', request()->ip())->latest()->get();
+            $categories = Category::where('status', 1)->latest()->get();
+            $copons = Copon::all();
+            $subtotle = Cart::all()->where('user_ip', request()->ip())->sum(function ($t) {
+                return $t->price * $t->qty;
+            });
+            return view('frontend.checkout', compact('subtotle', 'categories', 'carts', 'copons'));
+        } else {
+            return redirect()->route('login');
         }
     }
 }

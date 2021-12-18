@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -22,6 +23,7 @@ class FrontendController extends Controller
         $products = Product::find($id);
         $category_id = $products->category_id;
         $releted_product = Product::where('category_id', $category_id)->latest()->get();
-        return view('frontend.view_detels', compact('categories', 'products', 'releted_product'));
+        // $carts = Cart::all();
+        return view('frontend.view_detels', compact('categories', 'products', 'releted_product',));
     }
 }

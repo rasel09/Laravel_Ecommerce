@@ -61,8 +61,23 @@
                                 <input type="text" value="1">
                             </div>
                         </div>
+                        {{-- @foreach ($carts   as $cart)
+                        <form action="{{route('cart.update',$cart->id)}}" method="POST">
+                            @csrf
+                         <div class="quantity">
+                             <div class="pro-qty">
+                                 <input type="text" value="{{$cart->qty}}" min="1" name="qty">
+                             </div>
+                             <button type="submit" class="btn btn-primary btn-sm">Update</button>
+                         </div>
+                        </form>
+                        @endforeach --}}
                     </div>
-                    <a href="#" class="primary-btn">ADD TO CARD</a>
+                    <form class="d-inline" action="{{route('show.cart',$products->id)}}" method="POST">
+                        @csrf
+                        <input type="hidden" name="price" value="{{$products->price}}">
+                        <button type="submit" class="btn btn-primary">Add To Cart</button>
+                    </form>
                     <a href="#" class="heart-icon"><span class="icon_heart_alt"></span></a>
                     <ul>
                         <li><b>Availability</b> <span>In Stock</span></li>
@@ -142,7 +157,11 @@
                         <ul class="product__item__pic__hover">
                             <li><a href="#"><i class="fa fa-heart"></i></a></li>
                             <li><a href="#"><i class="fa fa-retweet"></i></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                            <form class="d-inline" action="{{route('show.cart',$product->id)}}" method="POST">
+                                @csrf
+                                <input type="hidden" name="price" value="{{$product->price}}">
+                                <li><button type="submit"><i class="fa fa-shopping-cart"></i></button></li>
+                            </form>
                         </ul>
                     </div>
                     <div class="product__item__text">

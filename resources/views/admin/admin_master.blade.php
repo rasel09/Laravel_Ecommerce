@@ -34,10 +34,13 @@
   </head>
 
   <body>
+      @guest
+          
+     @else
     @include('admin.include.sidebar')
   
     @include('admin.include.header')
-  
+    @endguest
     @yield('admin_content')
     
 

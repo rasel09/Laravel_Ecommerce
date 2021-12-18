@@ -76,5 +76,12 @@
         <li class="nav-item"><a href="{{route('copon.index')}}" class="nav-link @yield('manageCopon')">Manage Copon</a></li>
       </ul>
       
+       {{-- Admin Order--}}
+       <a href="{{route('order.index')}}" class="sl-menu-link @yield('order')">
+        <div class="sl-menu-item">
+          <i class="menu-item-icon icon ion-ios-home-outline tx-22"></i>
+          <span class="menu-item-label">Order</span>
+        </div>
+      </a>
       </div>
     </div>
