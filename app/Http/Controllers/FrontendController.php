@@ -26,4 +26,15 @@ class FrontendController extends Controller
         // $carts = Cart::all();
         return view('frontend.view_detels', compact('categories', 'products', 'releted_product',));
     }
-}
+
+    // ----------------------------------- shop page detels --------------------------------------
+    public function shopPage()
+    {
+        $categories = Category::where('status', 1)->latest()->get();
+        $products = product::latest()->paginate(9);
+        $latestProduct = Product::latest()->limit(3)->get();
+        return view('frontend.shop_page', compact('categories', 'products', 'latestProduct'));
+    }
+
+    // ------------------------------- Category Related product show ---------------------------------
+ 

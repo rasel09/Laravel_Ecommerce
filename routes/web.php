@@ -20,7 +20,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 // -------------------------------- Frontend Rout -------------------------------------
 Route::get('/', [FrontendController::class, 'index'])->name('home');
+//------------------------------------ product detels Route ------------------------------
 Route::get('/product/detalis/{id}', [FrontendController::class, 'productDedalis']);
+// ----------------------------------- Shop page Route ----------------------------------
+Route::get('shpo-page', [FrontendController::class, 'shopPage'])->name('shop.page');
+//  ----------------------- Catgegory related product show Route ------------
+// Route::get('category-related-product-show/{cat_id}', [FrontendController::class, 'categoryShow'])->name('category.show');
 
 // -------------------------------- Cart Route ---------------------------------
 Route::post('add-to-cart/{cart_id}', [CartController::class, 'showCart'])->name('show.cart');

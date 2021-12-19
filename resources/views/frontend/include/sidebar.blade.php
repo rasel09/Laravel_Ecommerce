@@ -10,7 +10,7 @@
         </div>
         <ul>
             @foreach ($categories as $category)
-            <li><a href="#">{{$category->category_name}}</a></li>
+            <li><a href="{{route('category.show',$category->id)}}">{{$category->category_name}}</a></li>
             @endforeach
         </ul>
     </div>
